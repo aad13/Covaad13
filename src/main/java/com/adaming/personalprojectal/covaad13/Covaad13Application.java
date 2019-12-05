@@ -1,13 +1,18 @@
-package com.adaming.personalprojectal.Covaad13;
+package com.adaming.personalprojectal.covaad13;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Covaad13Application {
+public class Covaad13Application implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Covaad13Application.class, args);
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+
+	}
 }

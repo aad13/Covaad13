@@ -1,4 +1,4 @@
-package com.adaming.personalprojectal.Covaad13;
+package com.adaming.personalprojectal.covaad13;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
