@@ -16,11 +16,28 @@ public class Trip {
     private String arrivalS;
     private LocalDateTime departureT;
     private int nbPlacesLeft;
-    private boolean over;
-    @ManyToMany(mappedBy = "trips")
+    private boolean finished;
+    @ManyToOne
+    private User owner;
+    //@ManyToMany(mappedBy = "tripsAsPassenger", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
+    @JoinTable(name = "user_trip",
+            joinColumns = @JoinColumn(name="trip_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"))
     private List<User> passengers;
 
     public Trip() {
+    }
+
+    public Trip(float price, String departureS, String arrivalS, LocalDateTime departureT, int nbPlacesLeft, boolean finished, User owner, List<User> passengers) {
+        this.price = price;
+        this.departureS = departureS;
+        this.arrivalS = arrivalS;
+        this.departureT = departureT;
+        this.nbPlacesLeft = nbPlacesLeft;
+        this.finished = finished;
+        this.owner=owner;
+        this.passengers=passengers;
     }
 
     public Long getId() {
@@ -71,12 +88,20 @@ public class Trip {
         this.nbPlacesLeft = nbPlacesLeft;
     }
 
-    public boolean isOver() {
-        return over;
+    public boolean isFinished() {
+        return finished;
     }
 
-    public void setOver(boolean over) {
-        this.over = over;
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public List<User> getPassengers() {

@@ -1,6 +1,8 @@
 package com.adaming.personalprojectal.covaad13.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -12,16 +14,32 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
+    @Email
+    @NotNull
     private String email;
+    @NotNull
     private String phoneNumber;
     private String vehicle;
     private int nbPlaces;
-    private boolean owner;
-    @ManyToMany
-    @JoinTable(name = "user_trip", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="course_id"))
-    private List<Trip> trips;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Trip> tripsAsOwner;
+    @ManyToMany(mappedBy = "passengers", cascade = CascadeType.ALL)
+    /*@ManyToMany
+    @JoinTable(name = "user_trip",
+            joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName = "id"))*/
+    private List<Trip> tripsAsPassenger;
 
     public User() {
+    }
+
+    public User(String firstName, String lastName, String email, String phoneNumber, String vehicle, int nbPlaces) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.vehicle = vehicle;
+        this.nbPlaces = nbPlaces;
     }
 
     public Long getId() {
@@ -80,19 +98,19 @@ public class User {
         this.nbPlaces = nbPlaces;
     }
 
-    public boolean isOwner() {
-        return owner;
+    public List<Trip> getTripsAsOwner() {
+        return tripsAsOwner;
     }
 
-    public void setOwner(boolean owner) {
-        this.owner = owner;
+    public void setTripsAsOwner(List<Trip> tripsAsOwner) {
+        this.tripsAsOwner = tripsAsOwner;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
+    public List<Trip> getTripsAsPassenger() {
+        return tripsAsPassenger;
     }
 
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
+    public void setTripsAsPassenger(List<Trip> tripsAsPassenger) {
+        this.tripsAsPassenger = tripsAsPassenger;
     }
 }
