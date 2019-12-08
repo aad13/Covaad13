@@ -1,7 +1,11 @@
 package com.adaming.personalprojectal.covaad13.entity;
 
+import com.adaming.personalprojectal.covaad13.dto.TripDto;
+import com.adaming.personalprojectal.covaad13.dto.UserDto;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +22,6 @@ public class Trip {
     private boolean finished;
     @ManyToOne
     private User owner;
-    //@ManyToMany(mappedBy = "tripsAsPassenger", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToMany
     @JoinTable(name = "user_trip",
             joinColumns = @JoinColumn(name="trip_id", referencedColumnName = "id"),
@@ -36,6 +39,14 @@ public class Trip {
         this.finished = finished;
         this.owner=owner;
         this.passengers=passengers;
+    }
+
+    public TripDto toDto(){
+        /*List<UserDto> passengersDto=new ArrayList<>();
+        for (User p:this.passengers) {
+            passengersDto.add(p.toDto());
+        }*/
+        return new TripDto(this.id,this.price,this.departureS,this.arrivalS,this.departureT/*,this.owner.toDto(),passengersDto*/,this.finished);
     }
 
     public Long getId() {

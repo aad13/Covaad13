@@ -1,8 +1,12 @@
 package com.adaming.personalprojectal.covaad13.entity;
 
+import com.adaming.personalprojectal.covaad13.dto.TripDto;
+import com.adaming.personalprojectal.covaad13.dto.UserDto;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,13 +25,9 @@ public class User {
     private String phoneNumber;
     private String vehicle;
     private int nbPlaces;
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Trip> tripsAsOwner;
-    @ManyToMany(mappedBy = "passengers", cascade = CascadeType.ALL)
-    /*@ManyToMany
-    @JoinTable(name = "user_trip",
-            joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName = "id"))*/
+    @ManyToMany(mappedBy = "passengers")
     private List<Trip> tripsAsPassenger;
 
     public User() {
@@ -38,6 +38,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.vehicle="Aucun";
     }
 
     public User(String firstName, String lastName, String email, String phoneNumber, String vehicle, int nbPlaces) {
@@ -47,6 +48,18 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.vehicle = vehicle;
         this.nbPlaces = nbPlaces;
+    }
+
+    public UserDto toDto(){
+        List<TripDto> tripsAsOwnerDto=new ArrayList<>();
+        for (Trip t:this.tripsAsOwner) {
+            tripsAsOwnerDto.add(t.toDto());
+        }
+        List<TripDto> tripsAsPassengerDto=new ArrayList<>();
+        for (Trip t:this.tripsAsPassenger) {
+            tripsAsPassengerDto.add(t.toDto());
+        }
+        return new UserDto(this.id,this.firstName,this.lastName,this.email,this.phoneNumber,this.vehicle,this.nbPlaces,tripsAsOwnerDto,tripsAsPassengerDto);
     }
 
     public Long getId() {
