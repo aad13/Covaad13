@@ -12,9 +12,8 @@ public class TripDto {
     private LocalDateTime departureT;
     //private UserDto owner;
     //private List<UserDto> passengers;
-    private boolean finished;
 
-    public TripDto(Long id, float price, String departureS, String arrivalS, LocalDateTime departureT/*, UserDto owner, List<UserDto> passengers*/, boolean finished) {
+    public TripDto(Long id, float price, String departureS, String arrivalS, LocalDateTime departureT/*, UserDto owner, List<UserDto> passengers*/) {
         this.id = id;
         this.price = price;
         this.departureS = departureS;
@@ -22,7 +21,6 @@ public class TripDto {
         this.departureT = departureT;
         //this.owner = owner;
         //this.passengers = passengers;
-        this.finished = finished;
     }
 
     public Long getId() {
@@ -80,12 +78,4 @@ public class TripDto {
     public void setPassengers(List<UserDto> passengers) {
         this.passengers = passengers;
     }*/
-
-    public boolean isFinished() {
-        return finished;
-    }
-
-    public void setFinished(boolean finished) {
-        this.finished = finished;
-    }
 }

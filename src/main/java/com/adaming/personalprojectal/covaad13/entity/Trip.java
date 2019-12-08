@@ -19,7 +19,6 @@ public class Trip {
     private String departureS;
     private String arrivalS;
     private LocalDateTime departureT;
-    private boolean finished;
     @ManyToOne
     private User owner;
     @ManyToMany
@@ -31,12 +30,11 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(float price, String departureS, String arrivalS, LocalDateTime departureT, boolean finished, User owner, List<User> passengers) {
+    public Trip(float price, String departureS, String arrivalS, LocalDateTime departureT, User owner, List<User> passengers) {
         this.price = price;
         this.departureS = departureS;
         this.arrivalS = arrivalS;
         this.departureT = departureT;
-        this.finished = finished;
         this.owner=owner;
         this.passengers=passengers;
     }
@@ -46,7 +44,7 @@ public class Trip {
         for (User p:this.passengers) {
             passengersDto.add(p.toDto());
         }*/
-        return new TripDto(this.id,this.price,this.departureS,this.arrivalS,this.departureT/*,this.owner.toDto(),passengersDto*/,this.finished);
+        return new TripDto(this.id,this.price,this.departureS,this.arrivalS,this.departureT/*,this.owner.toDto(),passengersDto*/);
     }
 
     public Long getId() {
@@ -87,14 +85,6 @@ public class Trip {
 
     public void setDepartureT(LocalDateTime departureT) {
         this.departureT = departureT;
-    }
-
-    public boolean isFinished() {
-        return finished;
-    }
-
-    public void setFinished(boolean finished) {
-        this.finished = finished;
     }
 
     public User getOwner() {
