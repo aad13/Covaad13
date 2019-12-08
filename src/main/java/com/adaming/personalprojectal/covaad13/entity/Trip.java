@@ -1,7 +1,7 @@
 package com.adaming.personalprojectal.covaad13.entity;
 
 import com.adaming.personalprojectal.covaad13.dto.TripDto;
-import com.adaming.personalprojectal.covaad13.dto.UserDto;
+import com.adaming.personalprojectal.covaad13.dto.UserForTripDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -30,6 +30,14 @@ public class Trip {
     public Trip() {
     }
 
+    public Trip(float price, String departureS, String arrivalS, LocalDateTime departureT, User owner) {
+        this.price = price;
+        this.departureS = departureS;
+        this.arrivalS = arrivalS;
+        this.departureT = departureT;
+        this.owner=owner;
+    }
+
     public Trip(float price, String departureS, String arrivalS, LocalDateTime departureT, User owner, List<User> passengers) {
         this.price = price;
         this.departureS = departureS;
@@ -40,11 +48,11 @@ public class Trip {
     }
 
     public TripDto toDto(){
-        /*List<UserDto> passengersDto=new ArrayList<>();
+        List<UserForTripDto> passengersDto=new ArrayList<>();
         for (User p:this.passengers) {
-            passengersDto.add(p.toDto());
-        }*/
-        return new TripDto(this.id,this.price,this.departureS,this.arrivalS,this.departureT/*,this.owner.toDto(),passengersDto*/);
+            passengersDto.add(p.toForTripDto());
+        }
+        return new TripDto(this.id,this.price,this.departureS,this.arrivalS,this.departureT,this.owner.toForTripDto(),passengersDto);
     }
 
     public Long getId() {

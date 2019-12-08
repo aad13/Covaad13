@@ -10,17 +10,17 @@ public class TripDto {
     private String departureS;
     private String arrivalS;
     private LocalDateTime departureT;
-    //private UserDto owner;
-    //private List<UserDto> passengers;
+    private UserForTripDto owner;
+    private List<UserForTripDto> passengers;
 
-    public TripDto(Long id, float price, String departureS, String arrivalS, LocalDateTime departureT/*, UserDto owner, List<UserDto> passengers*/) {
+    public TripDto(Long id, float price, String departureS, String arrivalS, LocalDateTime departureT, UserForTripDto owner, List<UserForTripDto> passengers) {
         this.id = id;
         this.price = price;
         this.departureS = departureS;
         this.arrivalS = arrivalS;
         this.departureT = departureT;
-        //this.owner = owner;
-        //this.passengers = passengers;
+        this.owner = owner;
+        this.passengers = passengers;
     }
 
     public Long getId() {
@@ -63,19 +63,19 @@ public class TripDto {
         this.departureT = departureT;
     }
 
-    /*public UserDto getOwner() {
+    public UserForTripDto getOwner() {
         return owner;
     }
 
-    public void setOwner(UserDto owner) {
+    public void setOwner(UserForTripDto owner) {
         this.owner = owner;
     }
 
-    public List<UserDto> getPassengers() {
+    public List<UserForTripDto> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(List<UserDto> passengers) {
+    public void setPassengers(List<UserForTripDto> passengers) {
         this.passengers = passengers;
-    }*/
+    }
 }

@@ -2,6 +2,7 @@ package com.adaming.personalprojectal.covaad13.entity;
 
 import com.adaming.personalprojectal.covaad13.dto.TripDto;
 import com.adaming.personalprojectal.covaad13.dto.UserDto;
+import com.adaming.personalprojectal.covaad13.dto.UserForTripDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -46,7 +47,11 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.vehicle = vehicle;
+        if(vehicle.equalsIgnoreCase("")) {
+            this.vehicle = "Aucun";
+        }else{
+            this.vehicle = vehicle;
+        }
         this.nbPlaces = nbPlaces;
     }
 
@@ -60,6 +65,10 @@ public class User {
             tripsAsPassengerDto.add(t.toDto());
         }
         return new UserDto(this.id,this.firstName,this.lastName,this.email,this.phoneNumber,this.vehicle,this.nbPlaces,tripsAsOwnerDto,tripsAsPassengerDto);
+    }
+
+    public UserForTripDto toForTripDto(){
+        return new UserForTripDto(this.id,this.firstName,this.vehicle,this.nbPlaces);
     }
 
     public Long getId() {

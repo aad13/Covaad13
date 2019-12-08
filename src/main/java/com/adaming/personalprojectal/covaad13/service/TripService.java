@@ -17,6 +17,10 @@ public class TripService {
     @Autowired
     private TripRepository tripRepository;
 
+    public void persist(Trip t){
+        this.tripRepository.save(t);
+    }
+
     @Transactional
     public void registerNew(Trip t) throws NullTripException, TripAlreadyExistException, TooEarlyTripException {
         if (t==null){
@@ -53,5 +57,9 @@ public class TripService {
 
     public Iterable<Trip> fetchAll(){
         return this.tripRepository.findAll();
+    }
+
+    public void removeById(Long tId) {
+        this.tripRepository.deleteById(tId);
     }
 }

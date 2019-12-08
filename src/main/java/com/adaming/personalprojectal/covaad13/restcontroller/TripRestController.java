@@ -1,19 +1,19 @@
 package com.adaming.personalprojectal.covaad13.restcontroller;
 
-        import com.adaming.personalprojectal.covaad13.dto.TripDto;
-        import com.adaming.personalprojectal.covaad13.entity.Trip;
-        import com.adaming.personalprojectal.covaad13.service.TripService;
-        import com.adaming.personalprojectal.covaad13.service.UserService;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.MediaType;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.PathVariable;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RestController;
+import com.adaming.personalprojectal.covaad13.dto.TripDto;
+import com.adaming.personalprojectal.covaad13.entity.Trip;
+import com.adaming.personalprojectal.covaad13.service.TripService;
+import com.adaming.personalprojectal.covaad13.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-        import java.time.LocalDateTime;
-        import java.util.ArrayList;
-        import java.util.List;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/covaad13/webapi")
@@ -35,7 +35,12 @@ public class TripRestController {
         return tripsDto;
     }
 
-    @GetMapping(value = "/user/{id}/trips", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/trips/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TripDto getTrip(@PathVariable("id") Long id){
+        return this.tripService.fetchById(id).toDto();
+    }
+
+    @GetMapping(value = "/users/{id}/trips", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<TripDto> getTripsForUser(@PathVariable("id") Long id){
         List<TripDto> tripsDto=new ArrayList<>();
         for (Trip t:this.userService.fetchById(id).getTripsAsOwner()) {
