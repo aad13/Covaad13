@@ -15,7 +15,6 @@ public class Trip {
     private String departureS;
     private String arrivalS;
     private LocalDateTime departureT;
-    private int nbPlacesLeft;
     private boolean finished;
     @ManyToOne
     private User owner;
@@ -29,12 +28,11 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(float price, String departureS, String arrivalS, LocalDateTime departureT, int nbPlacesLeft, boolean finished, User owner, List<User> passengers) {
+    public Trip(float price, String departureS, String arrivalS, LocalDateTime departureT, boolean finished, User owner, List<User> passengers) {
         this.price = price;
         this.departureS = departureS;
         this.arrivalS = arrivalS;
         this.departureT = departureT;
-        this.nbPlacesLeft = nbPlacesLeft;
         this.finished = finished;
         this.owner=owner;
         this.passengers=passengers;
@@ -78,14 +76,6 @@ public class Trip {
 
     public void setDepartureT(LocalDateTime departureT) {
         this.departureT = departureT;
-    }
-
-    public int getNbPlacesLeft() {
-        return nbPlacesLeft;
-    }
-
-    public void setNbPlacesLeft(int nbPlacesLeft) {
-        this.nbPlacesLeft = nbPlacesLeft;
     }
 
     public boolean isFinished() {
