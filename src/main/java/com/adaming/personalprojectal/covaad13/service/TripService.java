@@ -18,7 +18,7 @@ public class TripService {
     private TripRepository tripRepository;
 
     @Transactional
-    public void register(Trip t) throws NullTripException, TripAlreadyExistException, TooEarlyTripException {
+    public void registerNew(Trip t) throws NullTripException, TripAlreadyExistException, TooEarlyTripException {
         if (t==null){
             throw new NullTripException();
         }else{
@@ -30,6 +30,19 @@ public class TripService {
                 } else {
                     throw new TripAlreadyExistException();
                 }
+            }
+        }
+    }
+
+    @Transactional
+    public void register(Trip t) throws NullTripException, TripAlreadyExistException {
+        if (t==null){
+            throw new NullTripException();
+        }else{
+            if (this.tripRepository.getTripByOwnerAndDepartureSAAndArrivalSAndDepartureT(t.getOwner(),t.getDepartureS(), t.getArrivalS(), t.getDepartureT()) == null) {
+                this.tripRepository.save(t);
+            } else {
+                throw new TripAlreadyExistException();
             }
         }
     }

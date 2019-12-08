@@ -41,17 +41,17 @@ public class Covaad13Application implements CommandLineRunner {
 			}
 		}
 
-		Trip t11 = new Trip(15,"Nice","Aix",LocalDateTime.of(2020,12,6,13,50),false,u1,new ArrayList<>(Arrays.asList(u2,u3,u4)));
-		Trip t12 = new Trip(25,"Toulon","Lyon",LocalDateTime.of(2020,9,2,9,15),false,u1,new ArrayList<>(Arrays.asList(u2,u4)));
-		Trip t13 = new Trip(27.50f,"Montpellier","Toulouse",LocalDateTime.of(2020,4,13,21,10),false,u1,new ArrayList<>(Arrays.asList(u2,u3)));
-		Trip t21 = new Trip(10,"Antibes","Aix",LocalDateTime.of(2020,8,23,18,0),false,u2,new ArrayList<>(Arrays.asList(u3,u4)));
-		Trip t22 = new Trip(20,"Antibes","Béziers",LocalDateTime.of(2020,6,15,10,30),false,u2,new ArrayList<>(Arrays.asList(u1,u3,u4)));
-		Trip t31 = new Trip(7.50f,"Aix","Marseille",LocalDateTime.of(2021,3,12,13,30),false,u3,new ArrayList<>(Arrays.asList(u2,u4)));
+		Trip t11 = new Trip(15,"Nice","Aix",LocalDateTime.of(2019,12,17,13,50),false,u1,new ArrayList<>(Arrays.asList(u2,u3,u4)));
+		Trip t12 = new Trip(25,"Toulon","Lyon",LocalDateTime.of(2019,9,2,9,15),true,u1,new ArrayList<>(Arrays.asList(u2,u4)));
+		Trip t13 = new Trip(27.50f,"Montpellier","Toulouse",LocalDateTime.of(2019,12,13,21,10),false,u1,new ArrayList<>(Arrays.asList(u2,u3)));
+		Trip t21 = new Trip(10,"Antibes","Aix",LocalDateTime.of(2019,8,23,18,0),true,u2,new ArrayList<>(Arrays.asList(u3,u4)));
+		Trip t22 = new Trip(20,"Antibes","Béziers",LocalDateTime.of(2019,12,15,10,30),false,u2,new ArrayList<>(Arrays.asList(u1,u3,u4)));
+		Trip t31 = new Trip(7.50f,"Aix","Marseille",LocalDateTime.of(2019,12,10,13,30),false,u3,new ArrayList<>(Arrays.asList(u2,u4)));
 
 		for (Trip t:new ArrayList<>(Arrays.asList(t11,t12,t13,t21,t22,t31))){
 			try {
 				this.tripService.register(t);
-			} catch (NullTripException | TripAlreadyExistException | TooEarlyTripException e) {
+			} catch (NullTripException | TripAlreadyExistException e) {
 				e.printStackTrace();
 			}
 		}
