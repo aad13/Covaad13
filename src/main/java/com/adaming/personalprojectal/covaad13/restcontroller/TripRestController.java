@@ -23,10 +23,10 @@ public class TripRestController {
     private TripService tripService;
 
     @GetMapping(value = "/trips", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<TripDto> getUnfinishedTrips(){
+    public List<TripDto> getAvailableTrips(){
         List<TripDto> tripsDto=new ArrayList<>();
         for (Trip t:this.tripService.fetchAll()) {
-            if(t.getDepartureT().isAfter(LocalDateTime.now())){
+            if(t.getDepartureT().isAfter(LocalDateTime.now()) && t.getPassengers().size()<t.getOwner().getNbPlaces()){
                 tripsDto.add(t.toDto());
             }
         }
